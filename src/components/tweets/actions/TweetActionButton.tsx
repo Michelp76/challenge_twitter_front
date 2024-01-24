@@ -30,7 +30,7 @@ const TweetActionButton = ({
       className={`text-lg md:text-sm`}
       onClick={(e) => {
         e.stopPropagation()
-        onClick ? onClick(e) : null
+        return onClick ? onClick(e) : null
       }}
       icon={isSth && activeIcon ? activeIcon : icon}
       alignment="left"

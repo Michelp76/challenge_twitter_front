@@ -38,13 +38,13 @@
     "yup": "^0.32.8"
   },
   "scripts": {
-    "start": "run-p watch:css react-scripts:start",
+    "start": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
     "build": "run-s build:css react-scripts:build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:css": "cross-env NODE_ENV=production postcss src/styles/tailwind.css -o src/styles/index.css",
     "watch:css": "cross-env NODE_ENV=development postcss src/styles/tailwind.css -o src/styles/index.css --watch",
-    "react-scripts:start": "sleep 5 && react-scripts start",
+    "react-scripts:start": "react-scripts start",
     "react-scripts:build": "react-scripts build"
   },
   "eslintConfig": {
