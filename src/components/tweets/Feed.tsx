@@ -21,7 +21,7 @@ const Feed = () => {
 
   if (loading) return <BasicLoader />
   return (
-    <div className="w-full pb-4 md:pb-0">
+    <div className="w-full pb-8 md:pb-0">
       <TweetForm />
       {tweets.length > 0 && (
         <ul>

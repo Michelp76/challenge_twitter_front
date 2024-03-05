@@ -19,7 +19,7 @@ export const SingleUser = ({ user }: SingleUserProps) => {
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex">
-          <Avatar className="mr-2" user={user} />
+          {/* <Avatar className="mr-2" user={user} /> */}
           <div>
             <p className="">{user.display_name}</p>
             <p className="text-xs text-gray7">

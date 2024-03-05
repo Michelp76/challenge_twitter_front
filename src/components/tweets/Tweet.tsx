@@ -5,6 +5,7 @@ import {
   MdFavorite,
   MdLoop,
   MdModeComment,
+  MdEditNote  
 } from 'react-icons/md'
 import { useRecoilValue } from 'recoil'
 import { userState } from '../../state/userState'
@@ -23,6 +24,7 @@ import TweetForm, { TweetTypeEnum } from './TweetForm'
 import { Link, useHistory } from 'react-router-dom'
 import MyImage from '../MyImage'
 import LikeOrRetweet from './LikeOrRetweet'
+import { parseJsonBody } from '@apollo/client/link/http/parseAndCheckHttpResponse'
 
 type TweetProps = {
   tweet: TweetType
@@ -38,6 +40,7 @@ const Tweet = ({
   const history = useHistory()
 
   const [showCommentForm, setShowCommentForm] = useState(false)
+  const [editTweetForm, setEditTweetForm] = useState(false)
   // console.log('tweet', tweet)
 
   const renderParsedTweet = () => {
@@ -91,6 +94,11 @@ const Tweet = ({
     setShowCommentForm((old) => (old = !old))
   }
 
+  const toggleEditTweetForm = (e: any) => {
+    e.stopPropagation()
+    setEditTweetForm((old) => (old = !old))
+  }
+
   const renderLikeOrRetweet = () => {
     if (!tweet) return null
 
@@ -142,7 +150,7 @@ const Tweet = ({
       {/* Retweet */}
       {renderLikeOrRetweet()}
       <div
-        className="p-4 shadow bg-white rounded mb-6 block border hover:border-blue2 transition-colors duration-200 cursor-pointer"
+        className="p-6 shadow-xl bg-white mb-1 block border hover:border-blue2 transition-colors duration-200 cursor-pointer"
         onClick={(e) => {
           goToPage(`/status/${tweet.id}`)
         }}
@@ -150,7 +158,7 @@ const Tweet = ({
         <div>
           {/* Header */}
           <div className="flex items-center">
-            <Avatar className="mr-4" user={tweet.user} />
+            {/* <Avatar className="mr-4" user={tweet.user} /> */}
 
             <div>
               <div
@@ -190,7 +198,16 @@ const Tweet = ({
             hideTextOnMobile={true}
             onClick={toggleCommentForm}
           />
-
+          {/* Edit Button */}
+          <Button
+            text="Edit"
+            variant="default"
+            className="text-lg md:text-sm"
+            icon={<MdEditNote />}
+            alignment="left"
+            hideTextOnMobile={true}
+            onClick={toggleEditTweetForm}
+          />
           <RetweetButton id={tweet.id} />
           <LikeButton id={tweet.id} />
           <BookmarkButton id={tweet.id} />
@@ -203,6 +220,14 @@ const Tweet = ({
             onSuccess={() => setShowCommentForm(false)}
           />
         )}
+        {editTweetForm && (
+          <TweetForm
+            type={TweetTypeEnum.EDITTWEET}
+            tweet_id={tweet.id}
+            onSuccess={() => setEditTweetForm(false)}
+            originalTweet={tweet.body}
+          />
+        )}        
       </div>
     </>
   )

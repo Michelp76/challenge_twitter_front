@@ -10,7 +10,7 @@ const UsersToFollow = () => {
   if (loading) return <BasicLoader />
   if (error) return <div>An error occured</div>
   return (
-    <div className="rounded-lg shadow bg-white p-4 mt-4">
+    <div className="shadow-lg bg-white p-8 mt-4">
       <h3 className="mb-1 font-semibold text-gray5">Who to follow</h3>
       <hr />
       {data?.followersSuggestions.length > 0 && (

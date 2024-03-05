@@ -13,6 +13,16 @@ export const ADD_TWEET = gql`
   ${TWEET_FRAGMENT}
 `
 
+export const UPD_TWEET = gql`
+  mutation($id: Float!, $body: String!) {
+    updateTweet(id: $id, body: $body) {
+      id
+      body
+      created_at
+    }
+  }
+`
+
 export const TOGGLE_LIKE = gql`
   mutation($tweet_id: Float!) {
     toggleLike(tweet_id: $tweet_id)

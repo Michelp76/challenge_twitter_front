@@ -11,7 +11,7 @@ const Hashtags = () => {
   if (loading) return <BasicLoader />
   if (error) return <div>Error loading the hashtags</div>
   return (
-    <div className="rounded-lg shadow bg-white p-4">
+    <div className="shadow-lg shadow bg-white p-8">
       <h3 className="mb-1 font-semibold text-gray5">Trends</h3>
       <hr />
       {data && data.trendingHashtags ? (

@@ -9,7 +9,7 @@ const Home = () => {
     <Layout>
       <div className="w-full bg-gray1 md:p-4 flex flex-col justify-center items-center overflow-y-auto md:overflow-y-visible">
         {/* Tweet Column */}
-        <div className="container max-w-container flex mx-auto gap-4 p-4 md:p-0 overflow-y-auto">
+        <div className="container max-w-container flex mx-auto gap-4 p-8 md:p-0 overflow-y-auto">
           <div className="w-full md:w-tweetContainer">
             {/* Tweet Feed */}
             <Feed />
