@@ -1,14 +1,15 @@
 import { useLazyQuery, useQuery } from '@apollo/client'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { userState } from "../state/userState";
 import Layout from '../components/Layout'
 import BasicLoader from '../components/loaders/BasicLoader'
 import Feed from '../components/tweets/Feed'
 import Tweet from '../components/tweets/Tweet'
 import { COMMENTS, TWEET } from '../graphql/tweets/queries'
 import { singleTweetState, tweetsState } from '../state/tweetsState'
-import { TweetType } from '../types/types'
+import { TweetType, UserType } from '../types/types'
 
 const ShowTweet = () => {
   const params: any = useParams()
@@ -19,6 +20,9 @@ const ShowTweet = () => {
       tweet_id: +params.id,
     },
   })
+
+  // Retrieve user
+  const user: UserType | null = useRecoilValue(userState);
 
   const parent_id = data?.tweet?.id
 
@@ -57,6 +61,7 @@ const ShowTweet = () => {
                 <Tweet
                   key={`${t.id}_${index}`}
                   tweet={t}
+                  userId={user?.id}
                   showCommentMeta={false}
                 />
               )
