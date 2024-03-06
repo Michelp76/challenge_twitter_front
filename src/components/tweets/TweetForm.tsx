@@ -37,9 +37,9 @@ type TweetFormProps = {
 };
 
 export enum TweetTypeEnum {
-  TWEET = "Tweet",
-  EDITTWEET = "Modify",
-  COMMENT = "Comment",
+  TWEET = "tweet",
+  EDITTWEET = "modify",
+  COMMENT = "comment",
 }
 
 const TweetForm = ({
@@ -83,7 +83,7 @@ const TweetForm = ({
 
     // Type d'edit
     console.log(getTextButton(type));
-    const isMod = getTextButton(type) === TweetTypeEnum.EDITTWEET;
+    const isMod = bodyOGTweet !== '';
 
     // extract info from the tweet body ( urls, hashtags for now)
     console.log(bodyOGTweet);
