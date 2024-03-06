@@ -23,6 +23,12 @@ export const UPD_TWEET = gql`
   }
 `
 
+export const DELETE_TWEET = gql`
+  mutation($id: Float!) {
+    deleteTweet(id: $id)
+  }
+`
+
 export const TOGGLE_LIKE = gql`
   mutation($tweet_id: Float!) {
     toggleLike(tweet_id: $tweet_id)

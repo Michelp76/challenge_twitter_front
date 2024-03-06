@@ -1,9 +1,11 @@
 import { useQuery } from '@apollo/client'
 import React, { useEffect } from 'react'
+import { useRecoilValue } from 'recoil'
+import { userState } from '../../state/userState'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { FEED } from '../../graphql/tweets/queries'
 import { tweetsState } from '../../state/tweetsState'
-import { TweetType } from '../../types/types'
+import { TweetType, UserType } from '../../types/types'
 import BasicLoader from '../loaders/BasicLoader'
 import Comments from './Comments'
 import Tweet from './Tweet'
@@ -13,6 +15,10 @@ const Feed = () => {
   const [tweets, setTweets] = useRecoilState(tweetsState)
   const { data, loading, error } = useQuery(FEED)
 
+    // Retrieve user
+    const user: UserType | null = useRecoilValue(userState);
+  console.log(user);
+  
   useEffect(() => {
     if (data && data.feed && data.feed.length > 0) {
       setTweets(data.feed)
@@ -26,7 +32,7 @@ const Feed = () => {
       {tweets.length > 0 && (
         <ul>
           {tweets.map((t: TweetType, index: number) => {
-            return <Tweet key={`${t.id}_${index}`} tweet={t} />
+            return <Tweet key={`${t.id}_${index}`} tweet={t} userId={user?.id} />
           })}
         </ul>
       )}
